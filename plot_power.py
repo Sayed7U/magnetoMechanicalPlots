@@ -1,14 +1,12 @@
-import funcs
 import plots
 import numpy as np
-from scipy.io import loadmat
 from power import Power
 
 
 def main():
     Options = {'POD': 'PODI', 'neural_network': True, 'feed_forward_net': True, 'segmented': False, 'per_mode': True,
                'N_s': 45, 'm': 20,
-               'N_o': 40, 'x_axis_logged': False, 'No_segments': 20, 'layers': 1, 'chosen_sample': 'log space',
+               'N_o': 499, 'x_axis_logged': False, 'No_segments': 20, 'layers': 1, 'chosen_sample': 'log space',
                'neurons': 1, 'solver': 'adam', 'activation': 'identity', 'ffn_layers': 2, 'ffn_neurons': 16,
                'ffn_solver': 'trainbr',
                'custom_saveload': True, 'save_name': '', 'load_name': '', 'min_grad': 1e-10}
