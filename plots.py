@@ -14,7 +14,6 @@ CB91_Navy = '#1F618D'
 CB91_Grey = '#797D7f'
 CB91_Black = '#17202A'
 
-
 color_list = [CB91_Blue, CB91_Pink, CB91_Green, CB91_Amber,
               CB91_Purple, CB91_Violet, CB91_Red, CB91_Navy, CB91_Grey, CB91_Black]
 
@@ -22,6 +21,8 @@ plt.rcParams['axes.prop_cycle'] = plt.cycler(color=color_list)
 plt.rcParams['lines.linewidth'] = 2
 plt.rcParams['axes.labelsize'] = 16
 plt.rcParams['axes.titlesize'] = 16
+
+
 # plt.rcParams['text.usetex'] = True
 
 def plot_loss_curve(epochs, test_loss, train_loss, stop_reasons, xlabel, ylabel, text_ops, save_name,
@@ -31,7 +32,7 @@ def plot_loss_curve(epochs, test_loss, train_loss, stop_reasons, xlabel, ylabel,
     text_posY = text_ops['text_PosY']
     text_diff = text_ops['text_diff']
     if multiple:
-        assert(len(test_loss) == len(train_loss))
+        assert (len(test_loss) == len(train_loss))
         n_plots = len(test_loss)
         for i in range(n_plots):
             # print(f'{epochs[i]=}')
@@ -39,19 +40,21 @@ def plot_loss_curve(epochs, test_loss, train_loss, stop_reasons, xlabel, ylabel,
             # print(f'{train_loss[i]=}')
             plt.plot(epochs[i], train_loss[i], label="Train: {}".format(lgndlabels[i]))
             plt.plot(epochs[i], test_loss[i], label="Test: {}".format(lgndlabels[i]))
-            plt.text(text_posX, text_posY - text_diff*i , stop_reasons[i], bbox={'facecolor': 'white', 'alpha': 1, 'edgecolor': 'red',
-                                                            'pad':5}, ha='center', va='center', transform=plt.gca().transAxes)
+            plt.text(text_posX, text_posY - text_diff * i, stop_reasons[i],
+                     bbox={'facecolor': 'white', 'alpha': 1, 'edgecolor': 'red',
+                           'pad': 5}, ha='center', va='center', transform=plt.gca().transAxes)
     else:
         plt.plot(epochs, train_loss, label='Train')
         plt.plot(epochs, test_loss, label='Test')
-        plt.axhline(y=best_tr_loss, color='k', linestyle='--', label=f'Best train = {best_tr_loss[0,0]:.5}', linewidth=1)
+        plt.axhline(y=best_tr_loss, color='k', linestyle='--', label=f'Best train = {best_tr_loss[0, 0]:.5}',
+                    linewidth=1)
         plt.axvline(x=best_tr_epoch, color='k', linestyle='--', linewidth=1)
-#        plt.Circle((best_tr_epoch, best_tr_loss), 0.0001, color='blue')
+        #        plt.Circle((best_tr_epoch, best_tr_loss), 0.0001, color='blue')
 
-        plt.text(text_posX, text_posY - text_diff, stop_reasons, bbox={'facecolor': 'white', 'alpha': 1, 'edgecolor': 'red',
-                                                                             'pad':5}, ha='center', va='center', transform=plt.gca().transAxes)
+        plt.text(text_posX, text_posY - text_diff, stop_reasons,
+                 bbox={'facecolor': 'white', 'alpha': 1, 'edgecolor': 'red',
+                       'pad': 5}, ha='center', va='center', transform=plt.gca().transAxes)
 
-    
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend(loc=0)
@@ -59,7 +62,8 @@ def plot_loss_curve(epochs, test_loss, train_loss, stop_reasons, xlabel, ylabel,
     plt.savefig(f"figures/{save_name}.pdf")
     print(f'Saved figure to figures/{save_name}.pdf')
     plt.show()
-        
+
+
 def numpy_col_true_pred_plot(x_true, x_pred, true_array, pred_array, xlabel, ylabel, lgndlabels, save_name):
     ncols = true_array.shape[1]
     for i in range(ncols):
@@ -71,7 +75,8 @@ def numpy_col_true_pred_plot(x_true, x_pred, true_array, pred_array, xlabel, yla
         print(f'figures/{save_name}_{lgndlabels[i]}.pdf')
         plt.show()
 
-def list_scatter_line_log_plot(x1,x2, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6):
+
+def list_scatter_line_log_plot(x1, x2, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6):
     plt.figure()
     for i in range(len(ylist)):
         plt.plot(x1, ylist[i][0], linestyle="None", marker="x", label=lgndlabels[i][0], markersize=marker_size)
@@ -84,7 +89,8 @@ def list_scatter_line_log_plot(x1,x2, ylist, xlabel, ylabel, lgndlabels, save, m
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-def list_scatter_line_loglog_plot(x1,x2, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6):
+
+def list_scatter_line_loglog_plot(x1, x2, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6):
     plt.figure()
     for i in range(len(ylist)):
         plt.plot(x1, ylist[i][0], linestyle="None", marker="x", label=lgndlabels[i][0], markersize=marker_size)
@@ -99,11 +105,11 @@ def list_scatter_line_loglog_plot(x1,x2, ylist, xlabel, ylabel, lgndlabels, save
     plt.show()
 
 
-def list_scatter_line_log_multiple_plot(x1,x2,ylist,xlabel, ylabel, lgndlabels, save, marker_size=6):
+def list_scatter_line_log_multiple_plot(x1, x2, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6):
     plt.figure()
     plt.plot(x2, ylist[0], linestyle="None", marker="x", label=lgndlabels[0], markersize=marker_size)
     for i in range(1, len(ylist)):
-        plt.plot(x1, ylist[i], label = lgndlabels[i])
+        plt.plot(x1, ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -112,12 +118,14 @@ def list_scatter_line_log_multiple_plot(x1,x2,ylist,xlabel, ylabel, lgndlabels, 
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-def list_scatter_line_log_y1y2_plot(x1,x2,y1list,y2list,xlabel, ylabel, lgndlabels1, lgndlabels2, save, marker_size=6):
+
+def list_scatter_line_log_y1y2_plot(x1, x2, y1list, y2list, xlabel, ylabel, lgndlabels1, lgndlabels2, save,
+                                    marker_size=6):
     plt.figure()
     for i in range(len(y1list)):
         plt.plot(x1, y1list[i], linestyle="None", marker="x", label=lgndlabels1[i], markersize=marker_size)
     for i in range(len(y2list)):
-        plt.plot(x2, y2list[i], label = lgndlabels2[i])
+        plt.plot(x2, y2list[i], label=lgndlabels2[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -127,9 +135,6 @@ def list_scatter_line_log_y1y2_plot(x1,x2,y1list,y2list,xlabel, ylabel, lgndlabe
     plt.show()
 
 
-
-
-        
 def numpy_col_plot(x, y, xlabel, ylabel, lgndlabels, save):
     plt.figure()
     for index in range(y.shape[1]):
@@ -151,11 +156,12 @@ def simple_log_plot(x, y, xlabel, ylabel, save, xticks=[]):
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-def list_log_diff_plot(x, ylist, xlabel, ylabel, lgndlabels, save, diff,xticks=[]):
-    plt.figure(figsize=(12,9), dpi=100)
+
+def list_log_diff_plot(x, ylist, xlabel, ylabel, lgndlabels, save, diff, xticks=[]):
+    plt.figure(figsize=(12, 9), dpi=100)
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i])
-    plt.plot(x, diff, 'k--', label = 'Average Difference')
+        plt.plot(x, ylist[i], label=lgndlabels[i])
+    plt.plot(x, diff, 'k--', label='Average Difference')
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -166,9 +172,10 @@ def list_log_diff_plot(x, ylist, xlabel, ylabel, lgndlabels, save, diff,xticks=[
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-def listxy_log_plot(xlist, ylist, xlabel, ylabel ,lgndlabels, save, xticks=[], lgndlocation=0):
+
+def listxy_log_plot(xlist, ylist, xlabel, ylabel, lgndlabels, save, xticks=[], lgndlocation=0):
     for i in range(len(ylist)):
-        plt.plot(xlist[i], ylist[i], label = lgndlabels[i])
+        plt.plot(xlist[i], ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend(loc=lgndlocation)
@@ -179,9 +186,10 @@ def listxy_log_plot(xlist, ylist, xlabel, ylabel ,lgndlabels, save, xticks=[], l
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-def listxy_loglog_plot(xlist, ylist, xlabel, ylabel ,lgndlabels, save, xticks=[], lgndlocation=0):
+
+def listxy_loglog_plot(xlist, ylist, xlabel, ylabel, lgndlabels, save, xticks=[], lgndlocation=0):
     for i in range(len(ylist)):
-        plt.plot(xlist[i], ylist[i], label = lgndlabels[i])
+        plt.plot(xlist[i], ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend(loc=lgndlocation)
@@ -194,10 +202,9 @@ def listxy_loglog_plot(xlist, ylist, xlabel, ylabel ,lgndlabels, save, xticks=[]
     plt.show()
 
 
-    
 def list_log_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[], lgndlocation=0):
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i])
+        plt.plot(x, ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend(loc=lgndlocation)
@@ -207,10 +214,11 @@ def list_log_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[], lgndloc
     plt.savefig(f"figures/{save}.pdf")
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
+
 
 def list_loglog_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[], lgndlocation=0):
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i])
+        plt.plot(x, ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend(loc=lgndlocation)
@@ -221,12 +229,11 @@ def list_loglog_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[], lgnd
     plt.savefig(f"figures/{save}.pdf")
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
-
 
 
 def list_xylog_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[]):
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i])
+        plt.plot(x, ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -237,7 +244,6 @@ def list_xylog_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[]):
     plt.savefig(f"figures/{save}.pdf")
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
-
 
 
 def log_scatter_plot(x, y, xlabel, ylabel, save, xticks=[]):
@@ -251,7 +257,8 @@ def log_scatter_plot(x, y, xlabel, ylabel, save, xticks=[]):
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-def log_scatter_vline_plot(x, y, xlabel, ylabel, save, vline,xticks=[]):
+
+def log_scatter_vline_plot(x, y, xlabel, ylabel, save, vline, xticks=[]):
     plt.plot(x, y, linestyle="None", marker="x")
     plt.vlines(vline, 0, np.max(y), 'r', 'dashed')
     plt.xlabel(xlabel)
@@ -263,10 +270,10 @@ def log_scatter_vline_plot(x, y, xlabel, ylabel, save, vline,xticks=[]):
     print(f'Saved figure to figures/{save}.pdf')
     plt.show()
 
-    
+
 def list_log_scatter_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[]):
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i], linestyle="None", marker="x")
+        plt.plot(x, ylist[i], label=lgndlabels[i], linestyle="None", marker="x")
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -277,9 +284,10 @@ def list_log_scatter_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks=[])
     print(f"Saved to figures/{save}.pdf")
     plt.show()
 
+
 def listxy_log_scatter_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks):
     for i in range(len(ylist)):
-        plt.plot(x[i], ylist[i], label = lgndlabels[i], linestyle="None", marker="x")
+        plt.plot(x[i], ylist[i], label=lgndlabels[i], linestyle="None", marker="x")
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -289,7 +297,8 @@ def listxy_log_scatter_plot(x, ylist, xlabel, ylabel, lgndlabels, save, xticks):
     plt.savefig(f"figures/{save}.pdf")
     print(f"Saved to figures/{save}.pdf")
     plt.show()
-    
+
+
 def simple_plot(x, y, xlabel, ylabel, save):
     plt.plot(x, y)
     plt.xlabel(xlabel)
@@ -297,6 +306,7 @@ def simple_plot(x, y, xlabel, ylabel, save):
     plt.savefig(f"figures/{save}.pdf")
     print(f"Saved to figures/{save}.pdf")
     plt.show()
+
 
 def simple_scatter_plot(x, y, xlabel, ylabel, save):
     plt.plot(x, y, linestyle="None", marker="x")
@@ -307,19 +317,19 @@ def simple_scatter_plot(x, y, xlabel, ylabel, save):
     plt.show()
 
 
-    
 def list_plot(x, ylist, xlabel, ylabel, lgndlabels, save):
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i])
+        plt.plot(x, ylist[i], label=lgndlabels[i])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
     plt.savefig(f"figures/{save}.pdf")
     plt.show()
 
+
 def list_scatter_plot(x, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6):
     for i in range(len(ylist)):
-        plt.plot(x, ylist[i], label = lgndlabels[i], linestyle="None", marker="x", markersize=marker_size)
+        plt.plot(x, ylist[i], label=lgndlabels[i], linestyle="None", marker="x", markersize=marker_size)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
@@ -327,6 +337,7 @@ def list_scatter_plot(x, ylist, xlabel, ylabel, lgndlabels, save, marker_size=6)
     print(f"Saved to figures/{save}.pdf")
 
     plt.show()
+
 
 def plot_freq_G(freq, G, savename, m):
     max_lines = 10
@@ -338,10 +349,10 @@ def plot_freq_G(freq, G, savename, m):
 
     for j in lines:
         if j < max_lines:
-            ax1.plot(freq, G[:,j], label=f"$\mathbf{{G}}_{{i{j}}}$")
+            ax1.plot(freq, G[:, j], label=f"$\mathbf{{G}}_{{i{j}}}$")
         else:
-            ax2.plot(freq, G[:,j], label=f"$\mathbf{{G}}_{{i{j}}}$")
-            
+            ax2.plot(freq, G[:, j], label=f"$\mathbf{{G}}_{{i{j}}}$")
+
     ax1.set_yscale("log")
     ax1.legend()
     ax1.set_xlabel("Frequency $i$ (Hz)")
@@ -356,7 +367,8 @@ def plot_freq_G(freq, G, savename, m):
         ax2.set_xscale("log")
         f2.savefig(f"figures/G_lineplot_11-20_{savename}.pdf")
     plt.show()
-        
+
+
 def plot_m_G(m, G, savename, n_freqs, xticks):
     max_lines = 10
     f1 = plt.figure()
@@ -371,12 +383,12 @@ def plot_m_G(m, G, savename, n_freqs, xticks):
     # or in lines
     for i in range(20):
         if i < max_lines:
-            ax1.plot(m, G[i,:], label=f"$\mathbf{{G}}_{{{i}j}}$", linestyle="None", marker=markers[r])
+            ax1.plot(m, G[i, :], label=f"$\mathbf{{G}}_{{{i}j}}$", linestyle="None", marker=markers[r])
             r += 1
         else:
-            ax2.plot(m, G[i,:], label=f"$\mathbf{{G}}_{{{i}j}}$", linestyle="None", marker=markers[q])
+            ax2.plot(m, G[i, :], label=f"$\mathbf{{G}}_{{{i}j}}$", linestyle="None", marker=markers[q])
             q += 1
-            
+
     ax1.set_yscale("log")
     ax1.legend()
     ax1.set_xlabel("Mode $j$")
@@ -392,13 +404,14 @@ def plot_m_G(m, G, savename, n_freqs, xticks):
         f2.savefig(f"figures/G_lineplot_xm_11-20_{savename}.pdf")
     plt.show()
 
+
 def plot_G_hist(G, savename):
     plt.figure()
     logbins = np.logspace(np.log10(G.min()), np.log10(G.max()), 10)
     bins = np.linspace(G.min(), G.max(), 10)
     print(logbins)
     G = G.flatten()
-    plt.hist(G, bins=logbins, rwidth=0.7, alpha = 0.7, )
+    plt.hist(G, bins=logbins, rwidth=0.7, alpha=0.7, )
     plt.xscale("log")
     # plt.xticks(logbins)
     plt.xlabel("$|\mathbf{G}_{ij}|$")
@@ -408,6 +421,7 @@ def plot_G_hist(G, savename):
     plt.savefig(f"figures/G_hist_{savename}.pdf")
     print(f"Saved to figures/G_hist_{savename}.pdf")
     plt.show()
+
 
 def plot_G_imshow(G, savename):
     plt.figure()
@@ -420,7 +434,6 @@ def plot_G_imshow(G, savename):
     plt.savefig(f"figures/G_imshow_{savename}.pdf")
     print(f"Saved to figures/G_imshow_{savename}.pdf")
     plt.show()
-
 
 
 # plot loss agianst no. of iterations for varying number of neurons
@@ -436,6 +449,7 @@ def plot_neurons_loss(neuron_iterations, loss, neurons, savename):
     plt.savefig(f"figures/neurons_loss_{savename}.eps")
     plt.show()
 
+
 def plot_neurons_log_loss(neuron_iterations, loss, neurons, savename):
     plt.figure()
     i = 0
@@ -449,7 +463,8 @@ def plot_neurons_log_loss(neuron_iterations, loss, neurons, savename):
     plt.savefig(f"figures/neurons_logloss_{savename}.pdf")
     plt.savefig(f"figures/neurons_logloss_{savename}.eps")
     plt.show()
-    
+
+
 def plot_neurons_score(neurons, score, savename):
     plt.figure()
     plt.rcParams['axes.prop_cycle'] = plt.cycler(color=color_list)
@@ -460,6 +475,7 @@ def plot_neurons_score(neurons, score, savename):
     plt.savefig(f"figures/neurons_score_{savename}.pdf")
     plt.savefig(f"figures/neurons_score_{savename}.eps")
     plt.show()
+
 
 def plot_heatmap_layers_neurons(layers, neurons, scores_array, savename):
     # Nx = len(layers)
@@ -473,7 +489,7 @@ def plot_heatmap_layers_neurons(layers, neurons, scores_array, savename):
     print(f'pcolor xx shape: {xx.shape}')
     print(f'pcolor yy shape: {yy.shape}')
     plt.pcolor(xx, yy, scores_array, cmap='BuPu', shading='auto', vmin=-0.1)
-#    print(np.where(scores_array.T == max(scores_array.T)))
+    #    print(np.where(scores_array.T == max(scores_array.T)))
     max_indicies = np.unravel_index(np.argmax(scores_array, axis=None), scores_array.shape)
     # print(max_indicies)
     print(f'layer with heighest score: {x[max_indicies[1]]}')
@@ -484,6 +500,7 @@ def plot_heatmap_layers_neurons(layers, neurons, scores_array, savename):
     plt.savefig(f'figures/heatmap_layers_neurons_{savename}.pdf')
     plt.savefig(f'figures/heatmap_layers_neurons_{savename}.eps')
     plt.show()
+
 
 def plot_heatmap_layers_neurons_ylog(layers, neurons, scores_array, savename):
     # Nx = len(layers)
@@ -497,20 +514,17 @@ def plot_heatmap_layers_neurons_ylog(layers, neurons, scores_array, savename):
     print(f'pcolor xx shape: {xx.shape}')
     print(f'pcolor yy shape: {yy.shape}')
     plt.pcolor(xx, yy, scores_array, cmap='BuPu', shading='auto')
-#    print(np.where(scores_array.T == max(scores_array.T)))
-    max_indicies = np.unravel_index(np.argmax(scores_array, axis=None), scores_array.shape)
-    # print(max_indicies)
-    print(f'layer with heighest score: {x[max_indicies[1]]}')
-    print(f'neuron with heighest score: {y[max_indicies[0]]}')
+    #    print(np.where(scores_array.T == max(scores_array.T)))
+    max_indices = np.unravel_index(np.argmax(scores_array, axis=None), scores_array.shape)
+    # print(max_indices)
+    print(f'layer with heighest score: {x[max_indices[1]]}')
+    print(f'neuron with heighest score: {y[max_indices[0]]}')
     plt.xlabel("No. of layers")
     plt.ylabel("No. of neurons")
     plt.yticks(neurons)
-    plt.yscale('log',basey=2)
-#    plt.colorbar(label='Score', ticks=np.arange(0, np.amax(scores_array), 0.05))
+    plt.yscale('log', basey=2)
+    #    plt.colorbar(label='Score', ticks=np.arange(0, np.amax(scores_array), 0.05))
     plt.colorbar(label='Score')
     plt.savefig(f'figures/heatmap_layers_neurons_{savename}.pdf')
     plt.savefig(f'figures/heatmap_layers_neurons_{savename}.eps')
     plt.show()
-    
-    
-    
