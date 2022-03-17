@@ -29,7 +29,7 @@ def main():
     xlabel = plot_options['xlabel']
     ylabel = plot_options['ylabel']
 
-    cond_factor_out = np.loadtxt(f'data/normA/{choice}/CondFactorOut.txt', skiprows=1, delimiter=",")
+    cond_factor_out = np.loadtxt(f'data/powerEnergy/{choice}/CondFactorOut.txt', skiprows=1, delimiter=",")
     print(f"{cond_factor_out.shape}")
     cond_factor_out_OVC = cond_factor_out[:, 2]
 
