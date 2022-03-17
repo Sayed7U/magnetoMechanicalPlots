@@ -12,8 +12,6 @@ def main():
                'ffn_solver': 'trainbr',
                'custom_saveload': True, 'save_name': '', 'load_name': '', 'min_grad': 1e-10}
 
-    globals().update(Options)
-
     choice = f"PODP_Ns{N_s}_CondOVCmarcos"
     Options['load_name'] = f'{choice}/FrequencySweepMHIGradXPowerEnergy'
 
@@ -21,6 +19,8 @@ def main():
     # freq_out = np.linspace(5, 105, N_o)
     # freq_out = np.linspace(15, 5000, Options['N_o'])
     Options['freqout'] = freq_out
+
+    globals().update(Options)
 
     power = Power(Options)
     y1, _ = power.load()
