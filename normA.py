@@ -1,13 +1,14 @@
 import numpy as np
 from scipy.io import loadmat
 
+
 class NormA:
 
     def __init__(self, Options):
         self.Options = Options
 
     def load(self):
-        if self.Options['custom_saveload']==True:
+        if self.Options['custom_saveload']:
             load_name = self.Options['load_name']
             save_name = self.Options['save_name']
             load_directory = 'data/normA/'
@@ -15,7 +16,6 @@ class NormA:
         else:
             load_name, save_name = self.__file_names()
             load_directory = '../data/normA/old/'
-
 
         load = load_directory + load_name
         save_directory = 'normA/'
@@ -29,19 +29,18 @@ class NormA:
         return output, save
 
     def plot_options(self):
-        
+
         if self.Options['neural_network']:
-            labels_list = ['4K Neural Network','77K Neural Network', 'OVC Neural Network']
+            labels_list = ['4K Neural Network', '77K Neural Network', 'OVC Neural Network']
         else:
             if self.Options['POD'] == 'PODI':
-                labels_list = ['4K Lagrange','77K Lagrange', 'OVC Lagrange']
+                labels_list = ['4K Lagrange', '77K Lagrange', 'OVC Lagrange']
             else:
-                labels_list = ['4K PODP','77K PODP', 'OVC PODP']
-                
-            
+                labels_list = ['4K PODP', '77K PODP', 'OVC PODP']
+
         x_label = 'Frequency (Hz)'
         y_label = '$||\mathbf{A}^{AC}_{\epsilon, hp}||$ (Vs$m^-1$)'
-        options_dict = {'xlabel': x_label, 'ylabel': y_label, 'labels':labels_list}
+        options_dict = {'xlabel': x_label, 'ylabel': y_label, 'labels': labels_list}
 
         return options_dict
 
@@ -65,7 +64,7 @@ class NormA:
         activation = self.Options['activation']
         POD = self.Options['POD']
         chosen_sample = self.Options['chosen_sample']
-        
+
         if neural_network:
             if segmented:
                 custom_filename = f'FrequencySweepMHIGradXNormA_NN{No_segments}Segments_{solver}_{activation}_l{layers}_n{neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}_m{m}.mat'
@@ -80,10 +79,10 @@ class NormA:
                     if chosen_sample == "log space":
                         custom_filename = f'FrequencySweepMHIGradXNormA_NN_ffn_{ffn_solver}_l{ffn_layers}_n{ffn_neurons}_{int(freqout[0])}to{int(freqout[-1])}Hzlogspace_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}_m{m}.mat'
                     elif chosen_sample == 'marcos':
-                        custom_filename = f'FrequencySweepMHIGradXNormA_NN_ffn_{ffn_solver}_l{ffn_layers}_n{ffn_neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}_m{m}.mat'                        
+                        custom_filename = f'FrequencySweepMHIGradXNormA_NN_ffn_{ffn_solver}_l{ffn_layers}_n{ffn_neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}_m{m}.mat'
                 else:
                     custom_filename = f'FrequencySweepMHIGradXNormA_NN_ffn_{ffn_solver}_l{ffn_layers}_n{ffn_neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_allModes_No{N_o}.mat'
-        else:     
+        else:
             custom_filename = f'FrequencySweepMHIGradXNormA_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}_m{m}.mat'
 
         if neural_network:
@@ -108,5 +107,3 @@ class NormA:
                 custom_savename = f'NormA_{POD}_Ns{N_s}_No{N_o}_{int(freqout[0])}to{int(freqout[-1])}Hz_xlogged'
 
         return custom_filename, custom_savename
-
-        

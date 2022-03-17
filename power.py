@@ -1,15 +1,23 @@
 import numpy as np
 from scipy.io import loadmat
 
+
 class Power:
 
     def __init__(self, Options):
         self.Options = Options
 
     def load(self):
-        load_name, save_name = self.__file_names()
 
-        load_directory = '../data/powerEnergy/'
+        if self.Options['custom_saveload']:
+            load_name = self.Options['load_name']
+            save_name = self.Options['save_name']
+            load_directory = 'data/powerEnergy/'
+
+        else:
+            load_name, save_name = self.__file_names()
+            load_directory = '../data/powerEnergy/old/'
+
         load = load_directory + load_name
         save_directory = 'power/'
         save = save_directory + save_name
@@ -22,24 +30,24 @@ class Power:
         data = loadmat(load)
         print(f'Loaded {load}')
         struct = data['IntegratedFields'][0, 0]
-        
+
         out4K = struct['OutPower4K'] * 2 * gamma4K
         out77K = struct['OutPower77K'] * 2 * gamma77K
         outOVC = struct['OutPowerOVC'] * 2 * gammaOVC
         output = [out4K, out77K, outOVC]
-        
+
         return output, save
 
     def plot_options(self):
-        
+
         if self.Options['neural_network']:
-            labels_list = ['4K Neural Network','77K Neural Network', 'OVC Neural Network']
+            labels_list = ['4K Neural Network', '77K Neural Network', 'OVC Neural Network']
         else:
-            labels_list = ['4K Lagrange','77K Lagrange', 'OVC Lagrange']
-            
+            labels_list = ['4K Lagrange', '77K Lagrange', 'OVC Lagrange']
+
         x_label = 'Frequency (Hz)'
         y_label = '$P^0(\omega)$'
-        options_dict = {'xlabel': x_label, 'ylabel': y_label, 'labels':labels_list}
+        options_dict = {'xlabel': x_label, 'ylabel': y_label, 'labels': labels_list}
 
         return options_dict
 
@@ -62,7 +70,7 @@ class Power:
         solver = self.Options['solver']
         activation = self.Options['activation']
         POD = self.Options['POD']
-        
+
         if neural_network:
             if segmented:
                 custom_filename = f'FrequencySweepMHIGradXPowerEnergy_NN{No_segments}Segments_{solver}_{activation}_l{layers}_n{neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}.mat'
@@ -77,7 +85,7 @@ class Power:
                     custom_filename = f'FrequencySweepMHIGradXPowerEnergy_NN_ffn_{ffn_solver}_l{ffn_layers}_n{ffn_neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}.mat'
                 else:
                     custom_filename = f'FrequencySweepMHIGradXPowerEnergy_NN_ffn_{ffn_solver}_l{ffn_layers}_n{ffn_neurons}_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_allModes_No{N_o}.mat'
-        else:     
+        else:
             custom_filename = f'FrequencySweepMHIGradXPowerEnergy_{int(freqout[0])}to{int(freqout[-1])}Hz_damp2e-3_q3_p3_Ns{N_s}{POD}_serial_OVCNS_No{N_o}.mat'
 
         if neural_network:
@@ -102,5 +110,3 @@ class Power:
                 custom_savename = f'Power_{POD}_Ns{N_s}_No{N_o}_{int(freqout[0])}to{int(freqout[-1])}Hz_xlogged'
 
         return custom_filename, custom_savename
-
-        

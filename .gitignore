@@ -25,6 +25,7 @@ data/
 figures/
 __pycache__
 arrays/
+.idea/
 
 # Packages #
 ############
