@@ -6,15 +6,18 @@ from power import Power
 
 
 def main():
-    Options = {'POD': 'PODI','neural_network': True, 'feed_forward_net': True, 'segmented': False, 'per_mode': True, 'N_s': 45, 'm': 20,
-            'N_o': 40, 'x_axis_logged': False, 'No_segments': 20, 'layers': 1, 'chosen_sample': 'log space',
-            'neurons': 1, 'solver': 'adam', 'activation': 'identity', 'ffn_layers': 2, 'ffn_neurons': 16, 'ffn_solver': 'trainbr',
-               'custom_saveload':True,'save_name': '', 'load_name': '', 'min_grad': 1e-10}
+    Options = {'POD': 'PODI', 'neural_network': True, 'feed_forward_net': True, 'segmented': False, 'per_mode': True,
+               'N_s': 45, 'm': 20,
+               'N_o': 40, 'x_axis_logged': False, 'No_segments': 20, 'layers': 1, 'chosen_sample': 'log space',
+               'neurons': 1, 'solver': 'adam', 'activation': 'identity', 'ffn_layers': 2, 'ffn_neurons': 16,
+               'ffn_solver': 'trainbr',
+               'custom_saveload': True, 'save_name': '', 'load_name': '', 'min_grad': 1e-10}
 
     # Comparisons
     LAGRANGE_PODI = True
     NEURAL_NETWORK = False
 
+    globals().update(Options)
     choice = f"PODP_Ns{N_s}_CondOVCmarcos"
 
     Options['load_name'] = f'{choice}/FrequencySweepMHIGradXPowerEnergy'
@@ -41,13 +44,10 @@ def main():
         plot_options_lagr = power_lagr.plot_options()
         labels_lagr = plot_options_lagr['labels']
 
-        labels = labels_lagr + labels_nn
-        y = y_lagr + y_nn
-        save_name = save_name_nn + '_lagrCompare'
+        xlabel = plot_options_lagr['xlabel']
+        ylabel = plot_options_lagr['ylabel']
 
-    if LAGRANGE_PODI and NEURAL_NETWORK:
-        plots.list_log_plot(freq_out, y, xlabel, ylabel, labels, save_name, lgndlocation=0)
-    elif LAGRANGE_PODI:
+    if LAGRANGE_PODI:
         plots.list_log_plot(freq_out, y_lagr, xlabel, ylabel, labels_lagr, save_name_lagr)
     elif NEURAL_NETWORK:
         plots.list_log_plot(freq_out, y_nn, xlabel, ylabel, labels_nn, save_name_nn)
