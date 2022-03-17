@@ -1,7 +1,4 @@
-import funcs
 import plots
-import numpy as np
-from scipy.io import loadmat
 from loss import Loss
 
 
