@@ -1,5 +1,5 @@
 import numpy as np
-from NormA import NormA
+from normA import NormA
 import os
 import plt_options
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ def main():
     freq_out = np.linspace(5, 5000, N_o)
     folder = f"4K_20Rows_Ns{N_s}"
     save_folder = f'figures/normA/{folder}'
-    save_dir = f"{save_folder}/NormA_4K_Conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
+    save_dir = f"{save_folder}/normA_4K_conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXNormA.mat"
