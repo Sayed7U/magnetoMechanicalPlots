@@ -15,7 +15,7 @@ def main():
     freq_out = np.linspace(5, 5000, N_o)
     folder = f"4K_20Rows_Ns{N_s}"
     save_folder = f'figures/normA/{folder}'
-    save_name = f"{save_folder}/NormA_4K_Conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
+    save_dir = f"{save_folder}/NormA_4K_Conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXNormA.mat"
@@ -41,8 +41,8 @@ def main():
     plt.ylabel(y_label)
     plt.legend()
     plt.yscale("log")
-    plt.savefig(save_name)
-    print(f'Saved figure to {save_name}')
+    plt.savefig(save_dir)
+    print(f'Saved figure to {save_dir}')
     plt.show()
 
 
