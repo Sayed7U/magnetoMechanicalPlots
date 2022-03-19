@@ -16,7 +16,7 @@ def main():
     NEURAL_NETWORK = False
 
     globals().update(Options)
-    choice = f"PODP_Ns{N_s}_CondOVCmarcos"
+choice = f"PODP_Ns{N_s}_CondOVCmarcos"
 
     Options['load_name'] = f'{choice}/FrequencySweepMHIGradXPowerEnergy'
 
