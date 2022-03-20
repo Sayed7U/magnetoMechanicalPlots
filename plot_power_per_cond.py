@@ -14,10 +14,10 @@ def main():
     m = 20
     freq_out = np.linspace(5, 5000, N_o)
     shield = "4K"
-    plot_shield = "4K"
+    plot_shield = "77K"
     folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos"
     save_folder = f'figures/powerEnergy/{folder}'
-    save_dir = f"{save_folder}/power_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}.pdf"
+    save_dir = f"{save_folder}/power_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}_plotShield{plot_shield}.pdf"
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"

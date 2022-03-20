@@ -10,8 +10,9 @@ class Energy:
         self.y_label = 'Kinetic energy (J)'
 
     def __load(self):
-        mat_data = loadmat(f"data/powerEnergy/{self.load_name}")
-        print(f'Loaded {self.load_name}')
+        load_dir = f"data/powerEnergy/{self.load_name}"
+        mat_data = loadmat(load_dir)
+        print(f'Loaded {load_dir}')
 
         # density
         rho4K = 2710
