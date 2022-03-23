@@ -16,11 +16,9 @@ def main():
 
     del_freq_out = 10
     freq_out = np.linspace(10, 10 + (N_o-1)*del_freq_out, N_o)
-    shield = "OVC"
-    plot_shield = "4K"
-    folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos2"
+    folder = f"PODI_freq_Ns{N_s}_logspace_l{layers}_n{neurons}"
     save_folder = f'figures/powerEnergy/{folder}'
-    save_dir = f"{save_folder}/power_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}_plotShield{plot_shield}.pdf"
+    save_dir = f"{save_folder}/power_NN_l{layers}_n{neurons}_Ns{N_s}_No{N_o}_logspace.pdf"
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"
@@ -32,17 +30,10 @@ def main():
     if not os.path.exists(f'{save_folder}'):
         os.makedirs(f'{save_folder}')
 
-    cond_factor_out = np.loadtxt(f'data/powerEnergy/{folder}/CondFactorOut.txt', skiprows=1, delimiter=",")
-    print(f"{cond_factor_out.shape=}")
-    shield_no = {"4K": 0, "77K": 1, "OVC": 2}
-    cond_factor_out_shield = cond_factor_out[:, shield_no[shield]]
-
-    y_conds = list(np.split(y[shield_no[plot_shield]], len(cond_factor_out_shield), axis=0))
-    labels = [f"PODP conductivity = {i}" for i in cond_factor_out_shield]
-
+    labels = ["4K shield", "77K shield", "OVC shield"]
     plt_options.main()
-    for i in range(len(y_conds)):
-        plt.plot(freq_out, y_conds[i], label=labels[i])
+    for i in range(len(y)):
+        plt.plot(freq_out, y[i], label=labels[i])
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend()
