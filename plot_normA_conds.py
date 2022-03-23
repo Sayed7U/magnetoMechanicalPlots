@@ -10,12 +10,20 @@ def main():
     N_s = 45
     layers = 2
     neurons = 16
-    N_o = 40
+    N_o = 500
     m = 20
-    freq_out = np.linspace(5, 5000, N_o)
-    folder = f"4K_20Rows_Ns{N_s}"
+    rows = 3
+    rows_out = 5
+    # freq_out = np.linspace(5, 5000, N_o)
+    del_freq_out = 10
+    freq_out = np.linspace(10, 10 + (N_o-1)*del_freq_out, N_o)
+
+    shield = "OVC"
+    plot_shield = "OVC"
+    folder = f"OVC_{rows}Rows_marcos_{rows_out}RowOutNormal"
     save_folder = f'figures/normA/{folder}'
-    save_dir = f"{save_folder}/normA_4K_conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
+    save_dir = f"{save_folder}/normA_OVC_{rows}Rows_marcos_{rows_out}RowOutNormal_m{m}_Ns{N_s}_No{N_o}.pdf"
+    # save_dir = f"{save_folder}/normA_4K_conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXNormA.mat"
@@ -29,10 +37,11 @@ def main():
 
     cond_factor_out = np.loadtxt(f'data/normA/{folder}/CondFactorOut.txt', skiprows=1, delimiter=",")
     print(f"{cond_factor_out.shape=}")
-    cond_factor_out_4k = cond_factor_out[:, 0]
+    shield_no = {"4K": 0, "77K": 1, "OVC": 2}
+    cond_factor_out_shield = cond_factor_out[:, shield_no[shield]]
 
-    y_conds = list(np.split(y[0], len(cond_factor_out_4k), axis=0))
-    labels = [f"NN conductivity = {i}" for i in cond_factor_out_4k]
+    y_conds = list(np.split(y[shield_no[plot_shield]], len(cond_factor_out_shield), axis=0))
+    labels = [f"NN conductivity = {i}" for i in cond_factor_out_shield]
 
     plt_options.main()
     for i in range(len(y_conds)):

@@ -12,9 +12,12 @@ def main():
     neurons = 16
     N_o = 500
     m = 20
-    freq_out = np.linspace(5, 5000, N_o)
+    # freq_out = np.linspace(5, 5000, N_o)
+
+    del_freq_out = 10
+    freq_out = np.linspace(10, 10 + (N_o-1)*del_freq_out, N_o)
     shield = "4K"
-    plot_shield = "77K"
+    plot_shield = "4K"
     folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos"
     save_folder = f'figures/powerEnergy/{folder}'
     save_dir = f"{save_folder}/power_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}_plotShield{plot_shield}.pdf"
