@@ -22,7 +22,7 @@ def main():
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"
-    obj = Energy(load_name)
+    obj = Energy(load_name, freq_out)
     y = obj.data
     x_label = obj.x_label
     y_label = obj.y_label
@@ -33,7 +33,7 @@ def main():
     q = 3
     p = 3
     load_name_full_order = f"FullOrder_q{q}_p{p}/FrequencySweepMHIGradXPowerEnergy.mat"
-    obj_full = Energy(load_name_full_order)
+    obj_full = Energy(load_name_full_order, freq_out)
     y_full = obj_full.data
 
     labels = ["NN PODI: 4K", "NN PODI: 77K", "NN PODI: OVC"]

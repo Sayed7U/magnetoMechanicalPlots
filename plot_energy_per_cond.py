@@ -1,5 +1,5 @@
 import numpy as np
-from power import Power
+from energy import Energy
 import os
 import matplotlib.pyplot as plt
 import plt_options
@@ -20,11 +20,13 @@ def main():
     plot_shield = "OVC"
     folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos2"
     save_folder = f'figures/powerEnergy/{folder}'
-    save_dir = f"{save_folder}/power_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}_plotShield{plot_shield}.pdf"
+    save_dir = f"{save_folder}/energy_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}_plotShield{plot_shield}.pdf"
     # ------------------------------------------------------------------
 
+    cond_factor_out = np.loadtxt(f'data/powerEnergy/{folder}/CondFactorOut.txt', skiprows=1, delimiter=",")
+    print(f"{cond_factor_out.shape=}")
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"
-    obj = Power(load_name)
+    obj = Energy(load_name,np.tile(freq_out, cond_factor_out.shape[0]))
     y = obj.data
     x_label = obj.x_label
     y_label = obj.y_label
@@ -32,8 +34,7 @@ def main():
     if not os.path.exists(f'{save_folder}'):
         os.makedirs(f'{save_folder}')
 
-    cond_factor_out = np.loadtxt(f'data/powerEnergy/{folder}/CondFactorOut.txt', skiprows=1, delimiter=",")
-    print(f"{cond_factor_out.shape=}")
+
     shield_no = {"4K": 0, "77K": 1, "OVC": 2}
     cond_factor_out_shield = cond_factor_out[:, shield_no[shield]]
 
