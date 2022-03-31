@@ -3,8 +3,9 @@ import numpy as np
 
 
 class Energy:
-    def __init__(self, load_name):
+    def __init__(self, load_name, freq_out):
         self.load_name = load_name
+        self.freq_out = freq_out
         self.data = self.__load()
         self.x_label = 'Frequency (Hz)'
         self.y_label = 'Kinetic energy (J)'
@@ -19,11 +20,12 @@ class Energy:
         rho77K = 2698
         rhoOVC = 7900
 
-        omega = 31415.93
+        omega = 2 * np.pi * self.freq_out
 
         struct = mat_data['IntegratedFields'][0, 0]
-        out4K = np.square(struct['DisplacementNorm4K']) * 2 * rho4K * (omega ** 2)
-        out77K = np.square(struct['DisplacementNorm77K']) * 2 * rho77K * (omega ** 2)
-        outOVC = np.square(struct['DisplacementNormOVC']) * 2 * rhoOVC * (omega ** 2)
+        out4K = 2 * rho4K * np.multiply(np.square(struct['DisplacementNorm4K'].reshape(-1)), np.square(omega))
+        out77K = 2 * rho77K * np.multiply(np.square(struct['DisplacementNorm77K'].reshape(-1)), np.square(omega))
+        outOVC = 2 * rhoOVC * np.multiply(np.square(struct['DisplacementNormOVC'].reshape(-1)), np.square(omega))
+
         output = [out4K, out77K, outOVC]
         return output

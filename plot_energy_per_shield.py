@@ -22,7 +22,7 @@ def main():
     # ------------------------------------------------------------------
 
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"
-    obj = Energy(load_name)
+    obj = Energy(load_name, freq_out)
     y = obj.data
     x_label = obj.x_label
     y_label = obj.y_label
@@ -31,6 +31,7 @@ def main():
         os.makedirs(f'{save_folder}')
 
     labels = ["4K shield", "77K shield", "OVC shield"]
+    print(y[0][0])
     plt_options.main()
     for i in range(len(y)):
         plt.plot(freq_out, y[i], label=labels[i])

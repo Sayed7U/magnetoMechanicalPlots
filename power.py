@@ -13,14 +13,9 @@ class Power:
         mat_data = loadmat(load_dir)
         print(f'Loaded {load_dir}')
 
-        # conductivity
-        gamma4K = 71.00
-        gamma77K = 33.00
-        gammaOVC = 1.40
-
         struct = mat_data['IntegratedFields'][0, 0]
-        out4K = struct['OutPower4K'] * 2 * gamma4K
-        out77K = struct['OutPower77K'] * 2 * gamma77K
-        outOVC = struct['OutPowerOVC'] * 2 * gammaOVC
+        out4K = struct['OutPower4K'] * 4
+        out77K = struct['OutPower77K'] * 4
+        outOVC = struct['OutPowerOVC'] * 4
         output = [out4K, out77K, outOVC]
         return output
