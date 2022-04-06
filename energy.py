@@ -3,6 +3,8 @@ import numpy as np
 
 
 class Energy:
+    __slots__ = ('load_name', 'freq_out', 'data', 'x_label', 'y_label')
+
     def __init__(self, load_name, freq_out):
         self.load_name = load_name
         self.freq_out = freq_out

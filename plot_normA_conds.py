@@ -20,7 +20,8 @@ def main():
 
     shield = "OVC"
     plot_shield = "OVC"
-    folder = f"OVC_{rows}Rows_marcos_{rows_out}RowOutNormal"
+    folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos3"
+    # folder = f"OVC_{rows}Rows_marcos_{rows_out}RowOutNormal"
     save_folder = f'figures/normA/{folder}'
     save_dir = f"{save_folder}/normA_OVC_{rows}Rows_marcos_{rows_out}RowOutNormal_m{m}_Ns{N_s}_No{N_o}.pdf"
     # save_dir = f"{save_folder}/normA_4K_conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"

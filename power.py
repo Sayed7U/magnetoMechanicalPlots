@@ -1,14 +1,14 @@
 from scipy.io import loadmat
+from dataclasses import dataclass
 
 
+@dataclass(frozen=True)
 class Power:
-    def __init__(self, load_name):
-        self.load_name = load_name
-        self.data = self.__load()
-        self.x_label = 'Frequency (Hz)'
-        self.y_label = '$P^0(\omega)$'
+    load_name: str
+    x_label = 'Frequency (Hz)'
+    y_label = '$P^0(\omega)$'
 
-    def __load(self):
+    def load(self):
         load_dir = f"data/powerEnergy/{self.load_name}"
         mat_data = loadmat(load_dir)
         print(f'Loaded {load_dir}')
