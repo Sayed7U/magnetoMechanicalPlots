@@ -27,7 +27,7 @@ def main():
     print(f"{cond_factor_out.shape=}")
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"
     obj = Energy(load_name, np.tile(freq_out, cond_factor_out.shape[0]))
-    y = obj.data
+    y = obj.load()
     x_label = obj.x_label
     y_label = obj.y_label
 
@@ -40,8 +40,8 @@ def main():
     y_conds = list(np.split(y[shield_no[plot_shield]], len(cond_factor_out_shield), axis=0))
     labels = [f"PODP conductivity = {i}" for i in cond_factor_out_shield]
 
-    obj_full_order = Energy("FullOrder_q3_p3_test/FrequencySweepMHIGradXPowerEnergy.mat", 15)
-    y_full_order = obj_full_order.data
+    obj_full_order = Energy("FullOrder_q3_p3_15Hz/FrequencySweepMHIGradXPowerEnergy.mat", 15)
+    y_full_order = obj_full_order.load()
     y_full_order_shield = np.split(y_full_order[shield_no[plot_shield]], len(cond_factor_out_shield), axis=0)
     print(y_full_order_shield)
 

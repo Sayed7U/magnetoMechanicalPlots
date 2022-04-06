@@ -40,7 +40,7 @@ def main():
     y_conds = list(np.split(y[shield_no[plot_shield]], len(cond_factor_out_shield), axis=0))
     labels = [f"PODP conductivity = {i}" for i in cond_factor_out_shield]
 
-    obj_full_order = Power("FullOrder_q3_p3_test/FrequencySweepMHIGradXPowerEnergy.mat")
+    obj_full_order = Power("FullOrder_q3_p3_15Hz/FrequencySweepMHIGradXPowerEnergy.mat")
     y_full_order = obj_full_order.load()
     y_full_order_shield = np.split(y_full_order[shield_no[plot_shield]], len(cond_factor_out_shield), axis=0)
     print(y_full_order_shield)
