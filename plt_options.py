@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def main():
+def main() -> object:
     # plot line colours, 10 colors all together
     CB91_Blue = '#2CBDFE'
     CB91_Green = '#47DBCD'
