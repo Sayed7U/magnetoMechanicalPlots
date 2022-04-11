@@ -11,7 +11,7 @@ def main():
     q = 3
     p = 3
     # freq_out = np.linspace(5, 5000, N_o)
-    POD = "PODI"
+    POD = "PODP"
     plot_shield = "4K"
     del_freq_out = 10
     freq_out = np.linspace(15, 15 + (N_o - 1) * del_freq_out, N_o)
@@ -35,15 +35,15 @@ def main():
     if not os.path.exists(f'{save_folder}'):
         os.makedirs(f'{save_folder}')
 
-    load_name_full_order = f"FullOrder_q{q}_p{p}/FrequencySweepMHIGradXPowerEnergy.mat"
-    freq_out_full = np.linspace(10, 10 + (N_o - 1) * del_freq_out, 500)
-    energy_full_order = Energy(load_name_full_order, freq_out_full)
+    load_name_full_order = f"FullOrder_q{q}_p{p}/No{len(freq_out)}/FrequencySweepMHIGradXPowerEnergy.mat"
+    # freq_out_full = np.linspace(10, 10 + (N_o - 1) * del_freq_out, 500)
+    energy_full_order = Energy(load_name_full_order, freq_out)
     energy_full_order.load()
 
     labels = ["$N_s = 23$", "$N_s = 45$", "$N_s = 90$", "$N_s = 180$"]
 
     plt_options.main()
-    plt.plot(freq_out_full, getattr(energy_full_order, f'out{plot_shield}'), label="Full Order")
+    plt.plot(freq_out, getattr(energy_full_order, f'out{plot_shield}'), label="Full Order")
     for i in range(4):
         plt.plot(freq_out, getattr(energies[i], f'out{plot_shield}'), label=labels[i])
     plt.xlabel(x_label)

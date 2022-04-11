@@ -18,7 +18,8 @@ def main():
     freq_out = np.linspace(10, 10 + (N_o - 1) * del_freq_out, N_o)
     shield = "OVC"
     plot_shield = "4K"
-    folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos4"
+    folder = f"PODI_NN_l{layers}_n{neurons}"
+    #folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos4"
     save_folder = f'figures/powerEnergy/{folder}'
     save_dir = f"{save_folder}/power_{shield}_conds_PODP_marcos_Ns{N_s}_No{N_o}_plotShield{plot_shield}.pdf"
     # ------------------------------------------------------------------

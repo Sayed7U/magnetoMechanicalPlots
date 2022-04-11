@@ -7,7 +7,7 @@ import numpy as np
 class Power:
     load_name: str
     x_label = 'Frequency (Hz)'
-    y_label = '$P^0(\omega)$'
+    y_label = '$P^0(W)$'
     out4K: np.array = field(init=False)
     out77K: np.array = field(init=False)
     outOVC: np.array = field(init=False)

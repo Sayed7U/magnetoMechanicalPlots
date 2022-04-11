@@ -23,7 +23,7 @@ def main():
 
     load_name = f"{folder}/FrequencySweepMHIGradXPowerEnergy.mat"
     obj = Power(load_name)
-    y = obj.data
+    y = obj.load()
     x_label = obj.x_label
     y_label = obj.y_label
 
@@ -32,9 +32,9 @@ def main():
 
     q = 3
     p = 3
-    load_name_full_order = f"FullOrder_q{q}_p{p}/FrequencySweepMHIGradXPowerEnergy.mat"
+    load_name_full_order = f"FullOrder_q{q}_p{p}/No{len(freq_out)}/FrequencySweepMHIGradXPowerEnergy.mat"
     obj_full = Power(load_name_full_order)
-    y_full = obj_full.data
+    y_full = obj_full.load()
 
     labels = ["NN PODI: 4K", "NN PODI: 77K", "NN PODI: OVC"]
     labels_full = ["Full order: 4K", "Full order: 77K", "Full order: OVC"]
