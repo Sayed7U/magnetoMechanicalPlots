@@ -18,6 +18,6 @@ def main() -> object:
                   CB91_Purple, CB91_Violet, CB91_Red, CB91_Navy, CB91_Grey, CB91_Black]
 
     plt.rcParams['axes.prop_cycle'] = plt.cycler(color=color_list)
-    plt.rcParams['lines.linewidth'] = 2
+    plt.rcParams['lines.linewidth'] = 1.5
     plt.rcParams['axes.labelsize'] = 16
     plt.rcParams['axes.titlesize'] = 16

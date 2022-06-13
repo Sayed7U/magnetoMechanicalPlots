@@ -28,13 +28,10 @@ def main():
     if not os.path.exists(f'{save_folder}'):
         os.makedirs(f'{save_folder}')
 
-    cond_factor_out = np.loadtxt(f'data/normA/{folder}/CondFactorOut.txt', skiprows=1, delimiter=",")
-    print(f"{cond_factor_out.shape=}")
-
     # y_conds = list(np.split(y, cond_factor_out.shape[0], axis=0))
     shields = ["4K", "77K", "OVC"]
-    labels = [f"{j} conductivity = {i}" for i, j in zip(cond_factor_out, shields)]
-    labels_def = [f"{i} conductivity = 1.0" for i in shields]
+    labels = [f"{i} shield" for i in shields]
+    labels_def = [f"{i} shield" for i in shields]
 
     load_name_def = f"freq/FullOrder/default/FrequencySweepMHIGradXNormA.mat"
     obj_def = NormA(load_name_def)

@@ -19,9 +19,11 @@ def main():
     # freq_out = np.linspace(10, 10 + (N_o-1)*del_freq_out, N_o)
 
     shield = "OVC"
-    plot_shield = "OVC"
-    # folder = f"PODP_Ns{N_s}_{shield}_3Rows_marcos3"
-    folder = f"freqCond/Ns{N_s}_NN_l{layers}_n{neurons}_{shield}_marcos"
+    plot_shield = "4K"
+
+    folder = f"freqCond/PODI_Ns{N_s}_GridInterpolant_{shield}_marcos"
+    # folder = f"freqCond/PODI_Ns{N_s}_NN_l{layers}_n{neurons}_{shield}_marcos"
+    # folder = f"freqCond/PODP_Ns{N_s}_{shield}_marcos"
     save_folder = f'figures/normA/{folder}'
     # save_dir = f"{save_folder}/normA_OVC_{rows}Rows_marcos_{rows_out}RowOutNormal_m{m}_Ns{N_s}_No{N_o}.pdf"
     save_dir = f"{save_folder}/normA_per_cond_{plot_shield}.pdf"

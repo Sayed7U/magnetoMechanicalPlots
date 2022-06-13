@@ -23,12 +23,14 @@ class Energy:
         rho77K = 2698
         rhoOVC = 7900
 
-        omega = 2 * np.pi * self.freq_out
+        freq_out = np.reshape(self.freq_out, (-1, 1))
+        omega = 2 * np.pi * freq_out
 
         struct = mat_data['IntegratedFields'][0, 0]
-        self.out4K = 2 * rho4K * np.multiply(np.square(struct['DisplacementNorm4K'].reshape(-1)), np.square(omega))
-        self.out77K = 2 * rho77K * np.multiply(np.square(struct['DisplacementNorm77K'].reshape(-1)), np.square(omega))
-        self.outOVC = 2 * rhoOVC * np.multiply(np.square(struct['DisplacementNormOVC'].reshape(-1)), np.square(omega))
+        omega = np.repeat(omega, struct[0].shape[1], axis=1)
+        self.out4K = 2 * rho4K * np.multiply(np.square(struct['DisplacementNorm4K']), np.square(omega))
+        self.out77K = 2 * rho77K * np.multiply(np.square(struct['DisplacementNorm77K']), np.square(omega))
+        self.outOVC = 2 * rhoOVC * np.multiply(np.square(struct['DisplacementNormOVC']), np.square(omega))
 
         output = [self.out4K, self.out77K, self.outOVC]
         return output
