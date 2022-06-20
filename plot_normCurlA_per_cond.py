@@ -1,5 +1,5 @@
 import numpy as np
-from normA import NormA
+from normCurlA import NormCurlA
 import os
 import plt_options
 import matplotlib.pyplot as plt
@@ -23,16 +23,16 @@ def main():
     ncS = 20
 
     # folder = f"freqCond/PODI_Ns{N_s}_GridInterpolant_{shield}_PODPnCs{ncS}_marcos"
-    folder = f"freqCond/PODI_Ns{N_s}_NN_l{layers}_n{neurons}_{shield}_PODPnCs{ncS}_marcos"
-    # folder = f"freqCond/PODP_Ns{N_s}_{shield}_marcos"
+    # folder = f"freqCond/PODI_Ns{N_s}_NN_l{layers}_n{neurons}_{shield}_PODPnCs{ncS}_marcos"
+    folder = f"freqCond/PODP_Ns{N_s}_{shield}_marcos"
     save_folder = f'figures/normA/{folder}'
     # save_dir = f"{save_folder}/normA_OVC_{rows}Rows_marcos_{rows_out}RowOutNormal_m{m}_Ns{N_s}_No{N_o}.pdf"
     save_dir = f"{save_folder}/normA_per_cond_{plot_shield}.pdf"
     # save_dir = f"{save_folder}/normA_4K_conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
     # ------------------------------------------------------------------
 
-    load_name = f"{folder}/FrequencySweepMHIGradXNormA.mat"
-    obj = NormA(load_name)
+    load_name = f"{folder}/FrequencySweepMHIGradXNormCurlA.mat"
+    obj = NormCurlA(load_name)
     y = obj.data
     x_label = obj.x_label
     y_label = obj.y_label

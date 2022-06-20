@@ -13,7 +13,8 @@ def main():
     del_freq_out = 10
     freq_out = np.linspace(10, 10 + (N_o - 1) * del_freq_out, N_o)
 
-    folder = f"freq/Ns45_logspaced_marcos2_lagrange"
+    # folder = f"freq/Ns45_logspaced_marcos2_lagrange"
+    folder = f"freqCond/PODI_Ns45_NN_l2_n16_defaultCond"
     save_folder = f'figures/normA/{folder}'
     save_dir = f"{save_folder}/normA_againstDefaultFullOrder.pdf"
     # save_dir = f"{save_folder}/normA_4K_conds_l{layers}_n{neurons}_m{m}_Ns{N_s}_No{N_o}.pdf"
@@ -31,17 +32,17 @@ def main():
     # y_conds = list(np.split(y, cond_factor_out.shape[0], axis=0))
     shields = ["4K", "77K", "OVC"]
     labels = [f"{i} shield" for i in shields]
-    labels_def = [f"{i} shield" for i in shields]
+    labels_def = [f"{i} shield Full Order" for i in shields]
 
     load_name_def = f"freq/FullOrder/default/FrequencySweepMHIGradXNormA.mat"
     obj_def = NormA(load_name_def)
     y_def = obj_def.data
 
     plt_options.main()
-    for i in range(len(y_def)):
-        plt.plot(freq_out, y_def[i], label=labels_def[i])
     for i in range(len(y)):
         plt.plot(freq_out, y[i], label=labels[i])
+    for i in range(len(y_def)):
+        plt.plot(freq_out, y_def[i], label=labels_def[i])
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend()
